@@ -2,7 +2,7 @@
 
 namespace App\Http\Services;
 
-use App\Exceptions\PositionsNotFoundException;
+use App\Exceptions\NotFoundExceptions\PositionsNotFoundException;
 use App\Http\Repositories\PositionRepository;
 use App\Http\Resources\PositionCollection;
 use Illuminate\Http\JsonResponse;

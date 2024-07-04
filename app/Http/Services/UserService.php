@@ -2,8 +2,8 @@
 
 namespace App\Http\Services;
 
-use App\Exceptions\PageNotFoundException;
-use App\Exceptions\UserNotFoundException;
+use App\Exceptions\NotFoundExceptions\PageNotFoundException;
+use App\Exceptions\NotFoundExceptions\UserNotFoundException;
 use App\Http\Repositories\UserRepository;
 use App\Http\Resources\ShowUserResource;
 use App\Http\Resources\UserCollection;

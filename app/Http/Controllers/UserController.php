@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\PageNotFoundException;
-use App\Exceptions\UserNotFoundException;
+use App\Exceptions\NotFoundExceptions\PageNotFoundException;
+use App\Exceptions\NotFoundExceptions\UserNotFoundException;
 use App\Http\Requests\ShowUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Services\UserService;
