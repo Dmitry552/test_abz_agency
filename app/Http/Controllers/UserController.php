@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\NotFoundExceptions\PageNotFoundException;
 use App\Exceptions\NotFoundExceptions\UserNotFoundException;
+use App\Http\Requests\RegisterUserRequest;
 use App\Http\Requests\ShowUserRequest;
 use App\Http\Requests\UserRequest;
+use App\Http\Services\FileService;
 use App\Http\Services\UserService;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
     private UserService $service;
+    private FileService $fileService;
 
-    public function __construct(UserService $service)
+    public function __construct(UserService $service, FileService $fileService)
     {
         $this->service = $service;
+        $this->fileService = $fileService;
     }
 
     /**
@@ -34,10 +36,20 @@ class UserController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     *
+     * @param RegisterUserRequest $request
+     * @return JsonResponse
+     * @throws UserNotFoundException
      */
-    public function store(Request $request)
+    public function store(RegisterUserRequest $request): JsonResponse
     {
-        //
+        $photo = $request->photo;
+        $data = $request->all();
+
+        $path = $this->fileService->saveImage($photo);
+        $data['photo'] = $path;
+
+        return $this->service->createUser($data);
     }
 
     /**
@@ -50,21 +62,5 @@ class UserController extends Controller
     public function show(ShowUserRequest $request): JsonResponse
     {
         return $this->service->showUser($request->route('id'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
     }
 }

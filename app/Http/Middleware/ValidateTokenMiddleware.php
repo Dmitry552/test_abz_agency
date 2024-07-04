@@ -18,7 +18,7 @@ class ValidateTokenMiddleware
             return response()->json([
                 "success" => false,
                 "message" => "Unauthorized."
-            ]);
+            ], 401);
         }
 
         try {

@@ -23,6 +23,12 @@ class UserFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'phone' => '+380' . fake()->unique()->numberBetween(11111111, 99999999),
             'position_id' => fake()->numberBetween(1, 4),
+            'photo' => 'images/' . fake()->file(
+                public_path('/images'),
+                storage_path('/app/public/images'),
+                false
+                )
+
         ];
     }
 }

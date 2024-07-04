@@ -25,4 +25,13 @@ class UserRepository
     {
         return User::query()->find($id);
     }
+
+    /**
+     * @param array $data
+     * @return Model
+     */
+    public function createUser(array $data): Model
+    {
+        return User::query()->create($data);
+    }
 }

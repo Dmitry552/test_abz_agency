@@ -49,4 +49,24 @@ class UserService
 
         return response()->json(new ShowUserResource($user));
     }
+
+    /**
+     * @param array $data
+     * @return JsonResponse
+     * @throws UserNotFoundException
+     */
+    public function createUser(array $data): JsonResponse
+    {
+        $user = $this->repository->createUser($data);
+
+        if (empty($user)) {
+            throw new UserNotFoundException();
+        }
+
+        return response()->json([
+            'success' => true,
+            'user_id' => $user->id,
+            'message' => 'New user successfully registered'
+        ]);
+    }
 }

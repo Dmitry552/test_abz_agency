@@ -18,11 +18,12 @@ return new class extends Migration
 
             $table->unsignedBigInteger('position_id')->nullable();
             $table->string('phone')->unique();
-            $table->string('photo')->nullable();
+            $table->string('photo');
 
             $table->foreign('position_id')
                 ->references('id')
-                ->on('positions');
+                ->on('positions')
+                ->onDelete('set null');
         });
     }
 
