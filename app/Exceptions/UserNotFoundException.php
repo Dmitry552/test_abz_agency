@@ -5,9 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Http\JsonResponse;
 
-class PageNotFoundException extends Exception
+class UserNotFoundException extends Exception
 {
-    public function __construct(string $message = "Page not found")
+    public function __construct(string $message = "User not found")
     {
         parent::__construct($message);
     }

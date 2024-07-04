@@ -4,6 +4,7 @@ namespace App\Http\Repositories;
 
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 
 class UserRepository
 {
@@ -13,6 +14,15 @@ class UserRepository
      */
     public function getUsers(array $data): LengthAwarePaginator
     {
-        return User::query()->with('position')->paginate($data['count']);
+        return User::query()->paginate($data['count']);
+    }
+
+    /**
+     * @param int $id
+     * @return Model|null
+     */
+    public function getUserForId(int $id): Model | null
+    {
+        return User::query()->find($id);
     }
 }

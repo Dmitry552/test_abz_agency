@@ -19,6 +19,8 @@ class User extends Authenticatable
         'photo'
     ];
 
+    protected $with = ['position'];
+
     public function position(): BelongsTo
     {
         return $this->belongsTo(Position::class);

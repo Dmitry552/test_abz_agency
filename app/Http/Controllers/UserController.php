@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Exceptions\PageNotFoundException;
+use App\Exceptions\UserNotFoundException;
+use App\Http\Requests\ShowUserRequest;
 use App\Http\Requests\UserRequest;
 use App\Http\Services\UserService;
 use App\Models\User;
@@ -40,10 +42,14 @@ class UserController extends Controller
 
     /**
      * Display the specified resource.
+     *
+     * @param ShowUserRequest $request
+     * @return JsonResponse
+     * @throws UserNotFoundException
      */
-    public function show(User $user)
+    public function show(ShowUserRequest $request): JsonResponse
     {
-        //
+        return $this->service->showUser($request->route('id'));
     }
 
     /**

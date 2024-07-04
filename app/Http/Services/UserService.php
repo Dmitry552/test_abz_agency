@@ -1,9 +1,11 @@
 <?php
 
-namespace app\Http\Services;
+namespace App\Http\Services;
 
 use App\Exceptions\PageNotFoundException;
+use App\Exceptions\UserNotFoundException;
 use App\Http\Repositories\UserRepository;
+use App\Http\Resources\ShowUserResource;
 use App\Http\Resources\UserCollection;
 use Illuminate\Http\JsonResponse;
 
@@ -30,5 +32,21 @@ class UserService
         }
 
         return response()->json(new UserCollection($users));
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws UserNotFoundException
+     */
+    public function showUser(int $id): JsonResponse
+    {
+        $user = $this->repository->getUserForId($id);
+
+        if (empty($user)) {
+            throw new UserNotFoundException();
+        }
+
+        return response()->json(new ShowUserResource($user));
     }
 }
