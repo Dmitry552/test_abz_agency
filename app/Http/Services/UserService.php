@@ -5,8 +5,8 @@ namespace App\Http\Services;
 use App\Exceptions\NotFoundExceptions\PageNotFoundException;
 use App\Exceptions\NotFoundExceptions\UserNotFoundException;
 use App\Http\Repositories\UserRepository;
-use App\Http\Resources\ShowUserResource;
-use App\Http\Resources\UserCollection;
+use App\Http\Resources\Users\ShowUserResource;
+use App\Http\Resources\Users\UserCollection;
 use Illuminate\Http\JsonResponse;
 
 class UserService

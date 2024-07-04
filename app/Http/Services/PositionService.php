@@ -4,7 +4,7 @@ namespace App\Http\Services;
 
 use App\Exceptions\NotFoundExceptions\PositionsNotFoundException;
 use App\Http\Repositories\PositionRepository;
-use App\Http\Resources\PositionCollection;
+use App\Http\Resources\Positions\PositionCollection;
 use Illuminate\Http\JsonResponse;
 
 class PositionService
