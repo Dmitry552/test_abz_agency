@@ -67,6 +67,6 @@ class UserService
             'success' => true,
             'user_id' => $user->id,
             'message' => 'New user successfully registered'
-        ]);
+        ], 201);
     }
 }

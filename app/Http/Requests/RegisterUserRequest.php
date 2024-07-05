@@ -46,25 +46,34 @@ class RegisterUserRequest extends FormRequest
 
     public function failedValidation(Validator $validator)
     {
-        $failed = $validator->failed();
-        if (!empty($failed['email']['Unique']) || !empty($failed['phone']['Unique'])) {
-            $data = [
-                'message' => 'User with this phone or email already exist',
-            ];
-            $code = 409;
-        } else {
-            $data = [
-                'message' => 'Validation failed',
-                'fails' => $validator->errors(),
-            ];
-            $code = 422;
-        }
+        $data = $this->dataSelection($validator);
 
         $response = response()->json(
-            array_merge(['success' => false], $data),
-            $code
+            array_merge(['success' => false], $data['content']),
+            $data['code']
         );
 
         throw new HttpResponseException($response);
+    }
+
+    private function dataSelection(Validator $validator): array
+    {
+        $failed = $validator->failed();
+        $data = [];
+
+        if (!empty($failed['email']['Unique']) || !empty($failed['phone']['Unique'])) {
+            $data['content'] = [
+                'message' => 'User with this phone or email already exist',
+            ];
+            $data['code'] = 409;
+        } else {
+            $data['content'] = [
+                'message' => 'Validation failed',
+                'fails' => $validator->errors(),
+            ];
+            $data['code'] = 422;
+        }
+
+        return $data;
     }
 }
