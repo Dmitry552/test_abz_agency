@@ -1,0 +1,15 @@
+<script setup lang="ts">
+import { RouterView } from 'vue-router';
+import Main from '../layouts/Main.vue';
+
+</script>
+
+<template>
+    <component :is="Main">
+        <RouterView/>
+    </component>
+</template>
+
+<style scoped>
+
+</style>
