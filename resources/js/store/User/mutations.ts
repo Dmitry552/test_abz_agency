@@ -11,5 +11,8 @@ export default {
     },
     [types.ADD_USERS]: (state: TUserState, payload: User[]): void => {
         state.users = [...state.users!, ...payload]
+    },
+    [types.REWRITE_USERS]: (state: TUserState, payload: User[]): void => {
+        state.users = payload;
     }
 }

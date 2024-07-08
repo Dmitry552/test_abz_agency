@@ -24,10 +24,11 @@ class ValidateTokenMiddleware
         try {
             JWTAuth::setToken($token)->getPayload();
         } catch (JWTException $e) {
-            return response()->json(['error' => 'The token expired'], 401);
+            return response()->json([
+                "success" => false,
+                "message" => 'The token expired',
+            ], 401);
         }
-
-        JWTAuth::invalidate();
 
         return $next($request);
     }

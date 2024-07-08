@@ -20,4 +20,9 @@ class AuthService
             'token' => $token,
         ]);
     }
+
+    public function tokenReset()
+    {
+        JWTAuth::invalidate();
+    }
 }

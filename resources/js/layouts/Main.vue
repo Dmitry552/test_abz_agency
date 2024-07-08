@@ -5,8 +5,8 @@ import Header from "@/components/Header.vue";
 <template>
     <div class="w-full h-screen">
         <Header/>
-        <main class="bg-white h-full px-2 flex overflow-hidden
-          justify-center items-center"
+        <main class="bg-white h-full px-2 flex
+          justify-center items-start"
         >
             <slot/>
         </main>

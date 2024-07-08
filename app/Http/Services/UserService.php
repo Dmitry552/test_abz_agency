@@ -12,10 +12,12 @@ use Illuminate\Http\JsonResponse;
 class UserService
 {
     private UserRepository $repository;
+    private AuthService $authService;
 
-    public function __construct(UserRepository $repository)
+    public function __construct(UserRepository $repository, AuthService $authService)
     {
         $this->repository = $repository;
+        $this->authService = $authService;
     }
 
     /**
@@ -62,6 +64,8 @@ class UserService
         if (empty($user)) {
             throw new UserNotFoundException();
         }
+
+        $this->authService->tokenReset();
 
         return response()->json([
             'success' => true,

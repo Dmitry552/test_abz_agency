@@ -5,7 +5,7 @@ import PositionModule from "@/store/Position";
 import TokenModule from "@/store/Token";
 import UserModule from "@/store/User";
 
-export const key: InjectionKey<Store<TRootState>> = Symbol()
+export const key: InjectionKey<Store<TRootState>> = Symbol();
 
 export const store: Store<TRootState> = createStore<TRootState>({
     modules: {

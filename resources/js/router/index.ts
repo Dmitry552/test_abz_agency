@@ -1,6 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import {
+    createRouter,
+    createWebHistory,
+} from 'vue-router'
 import Home from '../pages/Home.vue'
 import CreateUser from '../pages/CreateUser.vue'
+import User from "../pages/User.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -11,11 +15,21 @@ const router = createRouter({
       component: Home
     },
     {
-      path: '/user',
-      name: 'user',
-      component: CreateUser
+      path: '/user/create',
+      name: 'createUser',
+      component: CreateUser,
     },
+    {
+      path: '/user/:id',
+      name: 'user',
+      component: User
+    },
+    {
+      path: '/:catchAll(.*)',
+      redirect: '/',
+    }
   ]
 })
+
 
 export default router

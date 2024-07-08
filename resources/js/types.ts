@@ -13,3 +13,8 @@ export type Position = {
     id: number,
     name: string
 }
+
+export interface IErrorResponse {
+    success: boolean,
+    message: string
+}
