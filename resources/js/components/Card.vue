@@ -34,14 +34,14 @@ function handleSelectUser() {
             <h2 class="text-lg font-bold tracking-tight text-gray-900 ">
                 {{props.user.name}}
             </h2>
-            <div class="w-full flex justify-between">
+            <div class="w-full flex flex-col sm:flex-row justify-between">
                 <div>
                     <p class="font-normal text-gray-700">
                         {{props.user.email}}
                     </p>
                 </div>
                 <div>
-                    <p class="ml-4 font-normal text-gray-700">
+                    <p class="m-0 sm:ml-4 font-normal text-gray-700">
                         {{props.user.phone}}
                     </p>
                 </div>

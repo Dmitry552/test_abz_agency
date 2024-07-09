@@ -3,11 +3,9 @@ import Header from "@/components/Header.vue";
 </script>
 
 <template>
-    <div class="w-full h-screen">
+    <div class="w-full pb-4">
         <Header/>
-        <main class="bg-white h-full px-2 flex
-          justify-center items-start"
-        >
+        <main class="bg-white h-full px-2 flex justify-center items-start">
             <slot/>
         </main>
     </div>

@@ -51,7 +51,7 @@ function handleDeleteImage() {
     </div>
     <span
         class="block w-full text-center text-red-600 text-sm"
-        v-if="props.error"
+        v-if="!showDropZone && props.error"
     >
         {{props.error}}
     </span>

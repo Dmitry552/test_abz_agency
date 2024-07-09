@@ -20,9 +20,9 @@ try {
 </script>
 
 <template>
-    <div class="max-w-4xl w-full flex items-center h-screen flex-wrap mx-auto my-0">
+    <div class="max-w-4xl w-full flex items-center justify-center h-screen flex-wrap mx-auto my-0">
         <div id="profile"
-             class="w-3/5 rounded-l-lg rounded-r-none shadow-2xl bg-white opacity-75 mx-0"
+             class="relative w-full sm:w-3/5 rounded-l-lg rounded-r-none shadow-2xl bg-white opacity-75"
         >
             <div class="p-12 text-left flex flex-col">
                 <h1 class="text-3xl font-bold pt-8 lg:pt-0">{{user.name}}</h1>
@@ -43,7 +43,7 @@ try {
                 </div>
             </div>
         </div>
-        <div class="w-52 -ml-14 z-10">
+        <div class="w-52 -ml-14 z-10 absolute top-44 sm:top-0 sm:relative">
             <img :src="user.photo" class="w-full rounded-lg shadow-2xl block" alt="photo">
         </div>
     </div>
