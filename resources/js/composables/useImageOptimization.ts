@@ -15,14 +15,13 @@ function useImageOptimization() {
     }
 
     const optimization = async (image: any)=> {
-        const api_key = import.meta.env.VITE_IMAGE_OPTIM;
         const formData = new FormData();
         formData.append('file', image);
 
-        const result = await fetch(`https://im2.io/${api_key}/70x70,crop`, {
-            method: 'POST',
-            body: formData,
-        })
+        const result = await fetch(`${import.meta.env.VITE_APP_URL}/api/proxy`, {
+                method: 'POST',
+                body: formData,
+            });
 
         return decode(result);
     }

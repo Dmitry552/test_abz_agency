@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PositionController;
+use App\Http\Controllers\ProxyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,3 +27,5 @@ Route::prefix('users')
 Route::get('/positions', [PositionController::class, 'index']);
 
 Route::get('/token', [AuthController::class, 'getToken']);
+
+Route::post('/proxy', [ProxyController::class, 'handle']);

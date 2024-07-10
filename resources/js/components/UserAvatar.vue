@@ -2,7 +2,7 @@
 type TProps = {
     showDropZone: boolean,
     image: string | undefined
-    error?: string
+    error: string[] | undefined
 }
 
 type TEmits = {
@@ -53,7 +53,7 @@ function handleDeleteImage() {
         class="block w-full text-center text-red-600 text-sm"
         v-if="!showDropZone && props.error"
     >
-        {{props.error}}
+        {{props.error[0]}}
     </span>
 </div>
 </template>

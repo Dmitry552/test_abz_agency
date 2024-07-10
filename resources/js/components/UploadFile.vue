@@ -2,7 +2,7 @@
 import { useDropzone } from "vue3-dropzone";
 
 type TProps = {
-    error?: string
+    error: string[] | undefined
 }
 
 type TEmits = {
@@ -12,7 +12,6 @@ type TEmits = {
 const emits = defineEmits<TEmits>();
 
 const props = defineProps<TProps>();
-
 
 function onDrop(acceptFiles: any) {
     if (acceptFiles[0]) {
@@ -74,7 +73,7 @@ const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
             class="block w-full text-center text-red-600 text-sm"
             v-if="props.error"
         >
-            {{props.error}}
+            {{props.error[0]}}
         </span>
     </div>
 </template>

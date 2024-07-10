@@ -16,10 +16,10 @@ const router = useRouter();
 
 const file = ref<File | null>(null);
 const fileUrl = ref<string>();
-const name = ref<string>();
-const email = ref<string>();
-const phone = ref<string>();
-const position_id = ref<number>();
+const name = ref<string>('');
+const email = ref<string>('');
+const phone = ref<string>('');
+const positionId = ref<string>('');
 const errorResponse = ref();
 
 const {optimization} = useImageOptimization();
@@ -64,14 +64,15 @@ function handleDeleteImage() {
 
 async function handleSubmit() {
     const data = new FormData();
-    data.append('name', name.value!);
+    data.append('name', name.value);
     data.append('email', email.value!);
     data.append('phone', phone.value!);
-    data.append('position_id', position_id.value);
+    data.append('position_id', positionId.value);
     data.append('photo', file.value!);
 
     try {
         const result = await createUsers(data);
+
         swal({
             title: 'Ok!',
             text: result.message,
@@ -92,21 +93,28 @@ async function handleSubmit() {
         }
     }
 }
+
+function resetErrors() {
+    errorResponse.value = null;
+}
 </script>
 
 <template>
-    <div class="w-full flex items-center justify-center p-4 mt-16 sm:mt-16">
+    <div
+        @click="resetErrors"
+        class="w-full flex items-center justify-center p-4 mt-16 sm:mt-16"
+    >
         <div class="mx-auto w-full  max-w-[550px] bg-white">
             <form>
                 <UploadFile
                     v-show="showDropZone"
                     @addedFile="handleAddedFile"
-                    :error="errorResponse?.photo[0]"
+                    :error="errorResponse?.photo"
                 />
                 <UserAvatar
                     :image="fileUrl!"
                     :showDropZone="showDropZone"
-                    :error="errorResponse?.photo[0]"
+                    :error="errorResponse?.photo"
                     @deleteImage="handleDeleteImage"
                 />
                 <my-input
@@ -117,7 +125,7 @@ async function handleSubmit() {
                     :error="errorResponse?.name"
                 />
                 <my-select
-                    v-model="position_id"
+                    v-model="positionId"
                     :positions="positions"
                     :error="errorResponse?.position_id"
                 />
