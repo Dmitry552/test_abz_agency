@@ -26,7 +26,7 @@ class RegisterUserRequest extends FormRequest
                 'required',
                 'string',
                 'starts_with:+380',
-                'max:12',
+                'max:13',
                 'unique:users,phone'
             ],
             'position_id' => [

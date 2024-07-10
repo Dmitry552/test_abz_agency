@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import { useDropzone } from "vue3-dropzone";
 
 type TProps = {
     error?: string
@@ -13,54 +13,30 @@ const emits = defineEmits<TEmits>();
 
 const props = defineProps<TProps>();
 
-const showDropZone = ref(true);
 
-function handleDragStart() {
-    showDropZone.value = false
-}
-
-function handleDarkLeave() {
-    showDropZone.value = true
-}
-
-function handleAddFile(event) {
-    const file = event.dataTransfer.files[0];
-    showDropZone.value = true
-
-    if (file) {
-        emits('addedFile', file)
+function onDrop(acceptFiles: any) {
+    if (acceptFiles[0]) {
+        emits('addedFile', acceptFiles[0])
     }
 }
 
-function handleFileChange(event) {
-    const file = event.target.files[0];
-    emits('addedFile', file)
-
-}
+const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 </script>
 
 <template>
     <div
         class="mb-5"
     >
-        <label for="photo" class="mb-3 block text-base font-medium text-[#07074D]">
+        <div class="mb-3 block text-base font-medium text-[#07074D]">
             Photo
-        </label>
+        </div>
         <div
-            class="flex items-center justify-center w-full"
-            @dragstart.prevent="handleDragStart"
-            @dragleave.prevent="handleDarkLeave"
-            @dragover.prevent="handleDragStart"
-            @drop.prevent="handleAddFile"
-        >
-            <label
-                v-if="showDropZone"
-                for="photo"
-                class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed
-                    rounded-lg cursor-pointer bg-gray-50"
-                :class="[props.error ? 'border-red-600' : 'border-gray-300']"
-            >
+            v-bind="getRootProps()"
+            class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed
+                    rounded-lg cursor-pointer bg-gray-50">
+            <div>
                 <div
+                    v-if="!isDragActive"
                     class="flex flex-col items-center justify-center pt-5 pb-6"
                 >
                     <svg
@@ -85,12 +61,14 @@ function handleFileChange(event) {
                     <p class="text-xs text-gray-500 ">only one file</p>
                     <p class="text-xs text-gray-500 ">JPEG or JPG</p>
                 </div>
-                <input id="photo" type="file" class="hidden" @change.prevent="handleFileChange"/>
-            </label>
-            <div
-                v-else
-                class="w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 z-10"
-            ></div>
+                <div
+                    v-else
+                    class="flex flex-col items-center justify-center pt-5 pb-6"
+                >
+                    <p>Drop the files here ...</p>
+                </div>
+                <input v-bind="getInputProps()" />
+            </div>
         </div>
         <span
             class="block w-full text-center text-red-600 text-sm"
